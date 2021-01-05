@@ -1,0 +1,83 @@
+.card-holder{
+  height: 33vh;
+  grid-row: 2/3;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.holder{
+	display: inline;
+}
+.c{
+	width: 20vh;
+	height: 17vh;
+	background-color: pink;
+	border-radius: 27px;
+	margin-top: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+
+}
+.slick-list{
+	height: 33vh;
+    width: 120vh;
+}
+.slick-slider{
+	width: 110vh;
+	
+}
+.slick-prev{
+	height: 1px !important;
+	display: none !important;
+}
+.slick-next{
+	height: 1px !important;
+	right: -50px !important; 
+	top: 42% !important ;
+}
+div{
+	outline: none;
+}
+.slick-next:before{
+width: 100px;
+height: 260px;
+content: '' !important;
+position: absolute;
+top: -130px;
+left: -70px;
+background-image: url('./Vector.png');
+background-repeat: no-repeat;
+background-position: center;
+backdrop-filter: blur(15px);
+
+}
+.name{
+	font-size: 1.5em;
+	font-family: nunito;
+	font-weight: 600;
+	width: 175px;
+	color: white;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
+.view{
+	color: #D89E5A;
+	font-size: 1.5em;
+	font-weight: 900;
+	font-family: nunito;
+	font-style: normal;
+	display: none;
+	cursor: pointer;
+
+}	
+.c:hover{
+	background: radial-gradient(117.07% 1241.4% at 0% 0%, rgba(0, 0, 0, 0.511) 0%, rgba(255, 255, 255, 0.105) 100%);
+backdrop-filter: blur(5px);
+}
+.c:hover .view{
+	display: inline;
+
+}
