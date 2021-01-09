@@ -9,6 +9,9 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; 
 import 'react-date-range/dist/theme/default.css';
 import admin from './admin.png';
+import Table from 'react-bootstrap/Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Pagination from "react-js-pagination";
   const App = () => {
     const [state, setState] = useState([
     {
@@ -24,6 +27,12 @@ import admin from './admin.png';
      var [page, setpage] = useState("loggedout");
      var [email, setemail] = useState("");
      var [password, setpassword] = useState("");
+     var [item1 , setitem1] = useState(["ok", "lol"]);
+     var [item2 , setitem2] = useState([]);
+     var [item3 , setitem3] = useState([]);
+     var [item4 , setitem4] = useState([]);
+     var [item5 , setitem5] = useState([]);
+     var [pagenumber , setpagenumber] = useState(1);
     const display = () => {
       console.log(date);
       console.log(time);
@@ -54,23 +63,27 @@ import admin from './admin.png';
   
    const createrows = () => {
          var arr = [];
-        for(var i = 1 ; i<=8; i++)
+        for(var i = 0 ; i<10; i++)
         {
-          if(i%2 !== 0)
-          {
-          arr.push(  
-           <div className='row'>
-                <p className='info'>event</p>
-                <p className='info'>150</p>
-                <p className='info'>12 jan,2012</p>
-                <p className='info'>15:02 pm</p>
-                <p className='info'>nothing</p>
-            </div>)
+          if(i%2==0){
+          arr.push(<tr className='rows'>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>{item1[0]}</td>
+        </tr>)
         }
         else{
-          arr.push(<div className='uselessrow'></div>)
+          arr.push(<tr className='rows-1'>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@anything</td>
+        </tr>)
         }
-      }
+        }
         console.log(arr);
         return arr;
    }
@@ -84,7 +97,15 @@ import admin from './admin.png';
      const getpass = (event) => {
      setpassword(event.target.value)
    }
-   const login = () =>{
+
+   const handlePageChange = (pagenumber) => {
+    console.log(`active page is ${pagenumber}`);
+    setpagenumber(pagenumber);
+
+  }
+  const loginbybutton = (event) => {
+     if(event.key === "Enter"){
+      
       if(email == "ok" && password == "12")
       {
         changepage("loggedin");
@@ -96,21 +117,35 @@ import admin from './admin.png';
       else{
        var value = document.getElementById("warning");
        value.style.display = "inline";
-        
+      }
+    }
+  } 
+   const login = (event) =>{
+      if(email == "ok" && password == "12")
+      {
+        changepage("loggedin");
+        setemail("");
+        setpassword("");
+        var value = document.getElementById("warning");
+        value.style.display = "none";
+      }
+      else{
+       var value = document.getElementById("warning");
+       value.style.display = "inline";
       }
    }   
       {if(page == "loggedout")
         {
-          return(<div className='login-container'>
+          return(<div onKeyPress={loginbybutton} className='login-container'>
                   <img className='logo1' src={logo1}/>
-                  <form class="search-bar-email" >
+                  <div class="search-bar-email" >
                      <input className='input-email' onChange={getemail} type="email" autoComplete="off" placeholder="Email Id" name="email"/>
-                 </form>
-                 <form class="search-bar-password" >
+                 </div>
+                 <div class="search-bar-password" >
                      <input className='input-password' onChange={getpass} type="Password" placeholder="Password" name="Password"/>
-                 </form>
+                 </div>
                  <p className='warning' id='warning'>Wrong Password or Email</p>
-                 <button className='login-button' onClick={login}>Login</button>
+                 <button className='login-button' id="login-button" onClick={login} >Login</button>
                  <img className='admin' src={admin}/>
             </div>);
         }
@@ -142,16 +177,26 @@ import admin from './admin.png';
           :
              <div className='i-4'>
                 <h1 className='h-i-1'>Event List</h1>
-                <div className='table'>
-                   <div className='headings'>
-                      <p className='h-p'>Title</p>
-                      <p className='h-p'>Registrations</p>
-                      <p className='h-p'>Date</p>
-                      <p className='h-p'>Time</p>
-                      <p className='h-p'>Edit</p>
-                   </div>
-                   {createrows()}
-                </div>
+                <Table borderless>
+                <thead>
+                   <tr className='heading'>
+                      <th>Title</th>
+                      <th>Registrations</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Edit</th>
+                   </tr>
+                </thead>
+                <tbody>
+                {createrows()}
+                </tbody>
+                </Table>
+                 <Pagination
+      activePage={pagenumber}
+      itemsCountPerPage={1}
+      totalItemsCount={20}
+      onChange={handlePageChange}
+    />
              </div>
        }
          
@@ -185,8 +230,7 @@ import admin from './admin.png';
       </div>
       );
       }  
-  }
-      
+  }  
 }
 
 export default App;

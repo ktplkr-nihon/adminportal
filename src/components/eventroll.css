@@ -30,7 +30,8 @@
 }
 .slick-prev{
 	height: 1px !important;
-	display: none !important;
+	right: -50px !important; 
+	top: 42% !important ;
 }
 .slick-next{
 	height: 1px !important;
@@ -51,6 +52,20 @@ background-image: url('./Vector.png');
 background-repeat: no-repeat;
 background-position: center;
 backdrop-filter: blur(15px);
+
+}
+.slick-prev:before{
+width: 100px;
+height: 260px;
+content: '' !important;
+position: absolute;
+top: -130px;
+left: -70px;
+background-image: url('./Vector.png');
+background-repeat: no-repeat;
+background-position: center;
+backdrop-filter: blur(15px);
+transform: rotate(180deg);
 
 }
 .name{
